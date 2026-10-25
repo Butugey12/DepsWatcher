@@ -3,9 +3,17 @@
     Console.WriteLine("Usage: DepsWatcher <path> [options]");
     return;
 }
+using System.CommandLine;
+using System.Runtime.CompilerServices;
+using DepsWatcher.cli;
 
-Timer timer = null;
-var path = args[0];
+var commandResult = CommandLine.Create(args);
+
+Console.WriteLine($"The path is {path}");
+Console.WriteLine($"The command is {command}");
+Console.WriteLine($"The debounce value is {debounce}");
+
+Timer? timer = null;
 using var watcher = new FileSystemWatcher(path);
 
 watcher.NotifyFilter = NotifyFilters.LastWrite;
